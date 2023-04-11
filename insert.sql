@@ -1,0 +1,1 @@
+insert into Region(code, libelle) values (1, 'Guadeloupe');
