@@ -28,18 +28,18 @@ create table ChefLieuDepartement (
 );
 
 create table StatCommuneAnnee (
-    codeCommune varchar(5) references Commune(code),
     id varchar(200),
     annee int,
+    codeCommune varchar(5) references Commune(code),
     valeur int,
     PRIMARY KEY(codeCommune, id, annee)
 );
 
 create table StatCommuneIntervalle (
-    codeCommune varchar(5) references Commune(code),
     id varchar(200),
     anneeDebut int,
     anneeFin int,
+    codeCommune varchar(5) references Commune(code),
     valeur int,
     PRIMARY KEY(codeCommune, id, anneeDebut, anneeFin)
 );

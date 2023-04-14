@@ -8,7 +8,7 @@ import io
 # Try to connect to an existing database
 print('Connexion à la base de données...')
 try:
-   conn = psycopg2.connect("host=pgsql dbname=melbertrand user=melbertrand password=melvin12")
+   conn = psycopg2.connect("host=pgsql dbname=albah user=albah password=1234")
 except Exception as e :
    exit("Connexion impossible à la base de données: " + str(e))
 
@@ -40,10 +40,7 @@ cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 # #Table ChefLieuRegion
 # csv_file = open('chefLieuReg.csv', 'r')
 # csv_reader = csv.reader(csv_file)
-# cur.copy_from(csv_file, 'ChefLieuRegion', sep=',', null='', columns=('code', 'commune'))
-# csv_file.close()
-# conn.commit()
-
+# cur.copy_from(csv_file, 'ChefLieuRegion', sep=statcommuneannee
 # #Table ChefLieuDepartement
 # csv_file = open('chefLieuDep.csv', 'r')
 # csv_reader = csv.reader(csv_file)
@@ -52,9 +49,9 @@ cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 # conn.commit()
 
 #Table StatCommune
-csv_file = open('stats/pop19', 'r')
+csv_file = open('stats/pop19.CSV', 'r')
 csv_reader = csv.reader(csv_file)
-cur.copy_from(csv_file, 'StatCommuneAnnee', sep=',', null='', columns=('code', ))
+cur.copy_from(csv_file, 'StatCommuneAnnee', sep=',', null='', columns=('id', 'annee','codeCommune','valeur' ))
 csv_file.close()
 conn.commit()
 
