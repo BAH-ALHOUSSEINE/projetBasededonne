@@ -8,7 +8,7 @@ import io
 # Try to connect to an existing database
 print('Connexion à la base de données...')
 try:
-   conn = psycopg2.connect("host=pgsql dbname=albah user=albah password=1234")
+   conn = psycopg2.connect("host=pgsql dbname=melbertrand user=melbertrand password=melvin12")
 except Exception as e :
    exit("Connexion impossible à la base de données: " + str(e))
 
@@ -40,7 +40,10 @@ cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 # #Table ChefLieuRegion
 # csv_file = open('chefLieuReg.csv', 'r')
 # csv_reader = csv.reader(csv_file)
-# cur.copy_from(csv_file, 'ChefLieuRegion', sep=statcommuneannee
+# cur.copy_from(csv_file, 'ChefLieuRegion', sep=',', null='', columns=('code', 'commune'))
+# csv_file.close()
+# conn.commit()
+
 # #Table ChefLieuDepartement
 # csv_file = open('chefLieuDep.csv', 'r')
 # csv_reader = csv.reader(csv_file)
@@ -48,12 +51,37 @@ cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 # csv_file.close()
 # conn.commit()
 
-#Table StatCommune
-csv_file = open('stats/pop19.CSV', 'r')
-csv_reader = csv.reader(csv_file)
-cur.copy_from(csv_file, 'StatCommuneAnnee', sep=',', null='', columns=('id', 'annee','codeCommune','valeur' ))
-csv_file.close()
-conn.commit()
+# #Table StatCommuneAnnee
+# csv_file = open('stats/pop19.CSV', 'r')
+# csv_reader = csv.reader(csv_file)
+# cur.copy_from(csv_file, 'StatCommuneAnnee', sep=',', null='', columns=('id', 'annee', 'codeCommune', 'valeur'))
+# csv_file.close()
+# conn.commit()
+
+# csv_file = open('stats/pop13.CSV', 'r')
+# csv_reader = csv.reader(csv_file)
+# cur.copy_from(csv_file, 'StatCommuneAnnee', sep=',', null='', columns=('id', 'annee', 'codeCommune', 'valeur'))
+# csv_file.close()
+# conn.commit()
+
+# csv_file = open('stats/pop08.CSV', 'r')
+# csv_reader = csv.reader(csv_file)
+# cur.copy_from(csv_file, 'StatCommuneAnnee', sep=',', null='', columns=('id', 'annee', 'codeCommune', 'valeur'))
+# csv_file.close()
+# conn.commit()
+
+# #Table StatCommuneIntervalle
+# csv_file = open('stats/naiss0813.CSV', 'r')
+# csv_reader = csv.reader(csv_file)
+# cur.copy_from(csv_file, 'StatCommuneIntervalle', sep=',', null='', columns=('id', 'anneeDebut', 'anneeFin', 'codeCommune', 'valeur'))
+# csv_file.close()
+# conn.commit()
+
+# csv_file = open('stats/naiss1319.CSV', 'r')
+# csv_reader = csv.reader(csv_file)
+# cur.copy_from(csv_file, 'StatCommuneIntervalle', sep=',', null='', columns=('id', 'anneeDebut', 'anneeFin', 'codeCommune', 'valeur'))
+# csv_file.close()
+# conn.commit()
 
 command = 'select * from region;'
 

@@ -18,13 +18,13 @@ create table Commune (
 create table ChefLieuRegion (
     code varchar(2) references Region(code),
     commune varchar(5) references Commune(code),
-    PRIMARY KEY(code)
+    PRIMARY KEY(commune)
 );
 
 create table ChefLieuDepartement (
     code varchar(3) references Departement(code),
     commune varchar(5) references Commune(code),
-    PRIMARY KEY(code)
+    PRIMARY KEY(commune)
 );
 
 create table StatCommuneAnnee (

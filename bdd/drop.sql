@@ -1,8 +1,7 @@
-drop table ChefLieuDepartement CASCADE;
-drop table ChefLieuRegion CASCADE;
-drop table commune   CASCADE;
-drop table departement   CASCADE;
-drop table region  CASCADE;
-drop table region  CASCADE;
-drop table StatCommuneAnnee  CASCADE;
-drop table StatCommuneIntervalle CASCADE;
+drop table ChefLieuDepartement;
+drop table ChefLieuRegion;
+drop table commune;
+drop table departement;
+drop table region;
+drop table StatCommuneAnnee;
+drop table StatCommuneIntervalle;
