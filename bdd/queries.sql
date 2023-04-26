@@ -1,15 +1,15 @@
 --Vue population des départements
-
+drop view population_année_region;
+drop view population_année_departement;
 create view population_année_departement as
 Select SUM(stat.valeur) as pop, stat.annee, d.codeDep
 from StatCommuneAnnee stat, Departement d, Commune c
 where stat.id = 'population' and c.codeCom = stat.codeCom and c.codeDep = d.codeDep
 GROUP BY (d.codeDep, stat.annee);
 
-drop view population_année_departement;
 
-select * from population_année_departement vue
-where vue.annee = '2019' and vue.codeDep = '12';
+
+
 
 
 --Vue population des régions
@@ -20,9 +20,13 @@ from population_année_departement as popDep, Departement d
 where popDep.codeDep = d.codeDep
 GROUP BY (d.codeReg, popDep.annee);
 
-drop view population_année_region;
 
-select vue.pop from population_année_region vue
+
+select * from population_année_departement vue
+where vue.annee = '2019' and vue.codeDep = '12';
+
+
+select * from population_année_region vue
 where vue.annee = '2019' and vue.codeReg = '76';
 
 
@@ -57,3 +61,4 @@ $$;
 
 call calculerPopulationRegion();
 select population from Region;
+*/
