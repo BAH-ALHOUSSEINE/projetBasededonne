@@ -33,3 +33,10 @@ ADD population INT;
 
 ALTER TABLE Region
 ADD population INT;
+
+--Procedure stocké
+
+CREATE PROCEDURE calculerSalaireMoyen(IN dep VARCHAR(3), OUT salaireMoyen DECIMAL(10,2))
+BEGIN
+    SELECT AVG(salaire_annuel) INTO salaireMoyen FROM employes WHERE departement = dep;
+END;
