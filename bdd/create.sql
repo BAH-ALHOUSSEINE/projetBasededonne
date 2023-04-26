@@ -1,46 +1,46 @@
 create table Region (
-    code varchar(2) constraint cle_region PRIMARY KEY,
+    codeReg varchar(2) constraint cle_region PRIMARY KEY,
     libelle varchar(200) constraint libelle_null not null
 );
 
 create table Departement (
-    code varchar(3) constraint cle_departement PRIMARY KEY,
+    codeDep varchar(3) constraint cle_departement PRIMARY KEY,
     libelle varchar(200) constraint libelle_null not null,
-    region varchar(2) references Region(code)
+    codeReg varchar(2) references Region(codeReg)
 );
 
 create table Commune (
-    code varchar(5) constraint cle_commune PRIMARY KEY,
+    codeCom varchar(5) constraint cle_commune PRIMARY KEY,
     libelle varchar(200) constraint libelle_null not null,
-    departement varchar(3) references Departement(code)
+    codeDep varchar(3) references Departement(codeDep)
 );
 
 create table ChefLieuRegion (
-    code varchar(2) references Region(code),
-    commune varchar(5) references Commune(code),
-    PRIMARY KEY(commune)
+    codeReg varchar(2) references Region(codeReg),
+    codeCom varchar(5) references Commune(codeCom),
+    PRIMARY KEY(codeCom)
 );
 
 create table ChefLieuDepartement (
-    code varchar(3) references Departement(code),
-    commune varchar(5) references Commune(code),
-    PRIMARY KEY(commune)
+    codeDep varchar(3) references Departement(codeDep),
+    codeCom varchar(5) references Commune(codeCom),
+    PRIMARY KEY(codeCom)
 );
 
 create table StatCommuneAnnee (
     id varchar(200),
     annee int,
-    codeCommune varchar(5) references Commune(code),
+    codeCom varchar(5) references Commune(codeCom),
     valeur int,
-    PRIMARY KEY(codeCommune, id, annee)
+    PRIMARY KEY(codeCom, id, annee)
 );
 
 create table StatCommuneIntervalle (
     id varchar(200),
     anneeDebut int,
     anneeFin int,
-    codeCommune varchar(5) references Commune(code),
+    codeCom varchar(5) references Commune(codeCom),
     valeur int,
-    PRIMARY KEY(codeCommune, id, anneeDebut, anneeFin)
+    PRIMARY KEY(codeCom, id, anneeDebut, anneeFin)
 );
 
