@@ -5,9 +5,15 @@ import io
 import sqlite3
 import psycopg2
 
+# print('Connexion à la base de données...')
+# try:
+#    conn = psycopg2.connect("host=pgsql dbname=albah user=albah password=1234")
+# except Exception as e :
+#    exit("Connexion impossible à la base de données: " + str(e))
+
 print('Connexion à la base de données...')
 try:
-   conn = psycopg2.connect("host=pgsql dbname=albah user=albah password=1234")
+   conn = psycopg2.connect("host=pgsql dbname=melbertrand user=melbertrand password=melvin12")
 except Exception as e :
    exit("Connexion impossible à la base de données: " + str(e))
 
@@ -20,7 +26,7 @@ def get_departements_by_region(region_code):
     cur = conn.cursor()
 
     # Requête pour récupérer les départements de la région donnée
-    query = "SELECT code, libelle FROM Departement WHERE region = ?"
+    query = "SELECT codeDep,libelle FROM Departement WHERE codeReg = %s"
     cur.execute(query, (region_code,))
 
     # Récupération des résultats
@@ -29,8 +35,10 @@ def get_departements_by_region(region_code):
     # Fermeture de la connexion et retour des résultats
     cur.close()
     conn.close()
-
-    return departements;
+    print ("codedept ,Libelle")
+    for row in departements:
+         print(row)
+    
 
 def list_communes_plus_de_x_habitants(departement, x):
     # Connexion à la base de données
@@ -38,13 +46,18 @@ def list_communes_plus_de_x_habitants(departement, x):
     # Création d'un curseur pour exécuter les requêtes
     cur = conn.cursor()
     # Exécution de la requête SQL
-    cur.execute("SELECT c.code, c.libelle, s.habitants FROM Commune c INNER JOIN StatCommuneAnnee s ON c.code = s.codeCommune WHERE c.departement = ? AND s.habitants > ?", (departement, x))
+    query="SELECT c.codeCom, c.libelle, s.valeur FROM Commune c INNER JOIN StatCommuneAnnee s ON c.code = s.codeCom WHERE c.codeDep = %s AND s.valeur > %s"
+    cur.execute(query, (departement, x))
     # Récupération des résultats
     resultats = cur.fetchall()
     # Fermeture de la connexion
     conn.close()
     # Retourne les résultats
-    return resultats;
+    print ("codedept ,Libelle,population")
+    print("\n")
+    for row in resultats:
+        print(row)
+        print("\n")
 
 
    
@@ -55,13 +68,13 @@ def select_top_communes(code_departement, n):
     
     # Requête SQL pour sélectionner les communes du département et leur population
     query = """
-        SELECT Commune.code, Commune.libelle, SUM(StatCommuneAnnee.habitants) as population
+        SELECT Commune.codeCom, Commune.libelle, SUM(StatCommuneAnnee.valeur) as population
         FROM Commune
-        INNER JOIN StatCommuneAnnee ON Commune.code = StatCommuneAnnee.codeCommune
-        WHERE Commune.departement = ?
-        GROUP BY Commune.code
+        INNER JOIN StatCommuneAnnee ON Commune.codeCom = StatCommuneAnnee.codeCom
+        WHERE Commune.codeDep = %s
+        GROUP BY Commune.codeCom
         ORDER BY population DESC
-        LIMIT ?
+        LIMIT %s
     """
     
     # Exécution de la requête avec les paramètres
@@ -74,12 +87,17 @@ def select_top_communes(code_departement, n):
     conn.close()
     
     # Retourne la liste des n communes les plus peuplées
-    return results
+    print ("codedept ,Libelle,population")
+    for row in results:
+        print(row)
+        print("\n")
 
 
 
-resultats = get_departements_by_region("01")
-print(resultats)
+# resultats = get_departements_by_region("84")
+print(select_top_communes("12", 10))
+
+
 
 
 
