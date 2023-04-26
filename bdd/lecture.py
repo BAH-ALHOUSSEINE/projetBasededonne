@@ -19,69 +19,69 @@ cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 # #Table Region
 # csv_file = open('v_region_2023.csv', 'r')
 # csv_reader = csv.reader(csv_file)
-# cur.copy_from(csv_file, 'Region', sep=',', columns=('code', 'libelle'))
+# cur.copy_from(csv_file, 'Region', sep=',', columns=('codeReg', 'libelle'))
 # csv_file.close()
 # conn.commit()
 
 # #Table departement
 # csv_file = open('v_departement_2023.csv', 'r')
 # csv_reader = csv.reader(csv_file)
-# cur.copy_from(csv_file, 'Departement', sep=',', columns=('code', 'region', 'libelle'))
+# cur.copy_from(csv_file, 'Departement', sep=',', columns=('codeDep', 'codeReg', 'libelle'))
 # csv_file.close()
 # conn.commit()
 
 # #Table commune
 # csv_file = open('v_commune_2023.csv', 'r')
 # csv_reader = csv.reader(csv_file)
-# cur.copy_from(csv_file, 'Commune', sep=',', null='', columns=('code', 'departement', 'libelle'))
+# cur.copy_from(csv_file, 'Commune', sep=',', null='', columns=('codeCom', 'codeDep', 'libelle'))
 # csv_file.close()
 # conn.commit()
 
 # #Table ChefLieuRegion
 # csv_file = open('chefLieuReg.csv', 'r')
 # csv_reader = csv.reader(csv_file)
-# cur.copy_from(csv_file, 'ChefLieuRegion', sep=',', null='', columns=('code', 'commune'))
+# cur.copy_from(csv_file, 'ChefLieuRegion', sep=',', null='', columns=('codeReg', 'codeCom'))
 # csv_file.close()
 # conn.commit()
 
 # #Table ChefLieuDepartement
 # csv_file = open('chefLieuDep.csv', 'r')
 # csv_reader = csv.reader(csv_file)
-# cur.copy_from(csv_file, 'ChefLieuDepartement', sep=',', null='', columns=('code', 'commune'))
+# cur.copy_from(csv_file, 'ChefLieuDepartement', sep=',', null='', columns=('codeDep', 'codeCom'))
 # csv_file.close()
 # conn.commit()
 
 # #Table StatCommuneAnnee
 # csv_file = open('stats/pop19.CSV', 'r')
 # csv_reader = csv.reader(csv_file)
-# cur.copy_from(csv_file, 'StatCommuneAnnee', sep=',', null='', columns=('id', 'annee', 'codeCommune', 'valeur'))
+# cur.copy_from(csv_file, 'StatCommuneAnnee', sep=',', null='', columns=('id', 'annee', 'codeCom', 'valeur'))
 # csv_file.close()
 # conn.commit()
 
 # csv_file = open('stats/pop13.CSV', 'r')
 # csv_reader = csv.reader(csv_file)
-# cur.copy_from(csv_file, 'StatCommuneAnnee', sep=',', null='', columns=('id', 'annee', 'codeCommune', 'valeur'))
+# cur.copy_from(csv_file, 'StatCommuneAnnee', sep=',', null='', columns=('id', 'annee', 'codeCom', 'valeur'))
 # csv_file.close()
 # conn.commit()
 
 # csv_file = open('stats/pop08.CSV', 'r')
 # csv_reader = csv.reader(csv_file)
-# cur.copy_from(csv_file, 'StatCommuneAnnee', sep=',', null='', columns=('id', 'annee', 'codeCommune', 'valeur'))
+# cur.copy_from(csv_file, 'StatCommuneAnnee', sep=',', null='', columns=('id', 'annee', 'codeCom', 'valeur'))
 # csv_file.close()
 # conn.commit()
 
 # #Table StatCommuneIntervalle
 # csv_file = open('stats/naiss0813.CSV', 'r')
 # csv_reader = csv.reader(csv_file)
-# cur.copy_from(csv_file, 'StatCommuneIntervalle', sep=',', null='', columns=('id', 'anneeDebut', 'anneeFin', 'codeCommune', 'valeur'))
+# cur.copy_from(csv_file, 'StatCommuneIntervalle', sep=',', null='', columns=('id', 'anneeDebut', 'anneeFin', 'codeCom', 'valeur'))
 # csv_file.close()
 # conn.commit()
 
-# csv_file = open('stats/naiss1319.CSV', 'r')
-# csv_reader = csv.reader(csv_file)
-# cur.copy_from(csv_file, 'StatCommuneIntervalle', sep=',', null='', columns=('id', 'anneeDebut', 'anneeFin', 'codeCommune', 'valeur'))
-# csv_file.close()
-# conn.commit()
+csv_file = open('stats/naiss1319.CSV', 'r')
+csv_reader = csv.reader(csv_file)
+cur.copy_from(csv_file, 'StatCommuneIntervalle', sep=',', null='', columns=('id', 'anneeDebut', 'anneeFin', 'codeCom', 'valeur'))
+csv_file.close()
+conn.commit()
 
 command = 'select * from region;'
 
